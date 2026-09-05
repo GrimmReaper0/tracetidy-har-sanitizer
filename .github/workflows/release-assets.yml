@@ -1,13 +1,21 @@
 name: Build release assets
 
-# This job runs when this workflow file itself changes. It exists to create the
-# checked-in deterministic distribution, synthetic fixture, verification logs,
-# and fictional-demo screenshots from the published source.
+# Keep checked-in deterministic distribution assets synchronized with source.
 on:
   push:
     branches: [main]
     paths:
       - .github/workflows/release-assets.yml
+      - web/**
+      - src/**
+      - scripts/build.mjs
+      - scripts/benchmark.mjs
+      - scripts/manifest.mjs
+      - examples/demo.mjs
+      - package.json
+      - package-lock.json
+      - requirements-dev.txt
+      - tests/browser/**
   workflow_dispatch:
 
 permissions:
