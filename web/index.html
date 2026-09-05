@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- CSP -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sanitize HAR files locally before sharing. Remove headers, cookies, bodies, and URL secrets, inspect a network waterfall, and create a debugging brief. No uploads or dependencies.">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <meta property="og:title" content="TraceTidy - Share the trace. Not the secrets.">
+  <meta property="og:description" content="An offline HAR sanitizer, waterfall viewer, and debugging brief generator. One HTML file. No uploads.">
+  <meta property="og:type" content="website">
+  <title>TraceTidy - Offline HAR Sanitizer &amp; Network Waterfall Viewer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%235ee0bd'/%3E%3Cpath d='M14 19h36v7H36v23h-8V26H14z' fill='%230c151a'/%3E%3C/svg%3E">
+  <style>/* INLINE_CSS */</style>
+</head>
+<body>
+  <a class="skip" href="#workspace">Skip to workspace</a>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="TraceTidy home"><span class="brand-icon" aria-hidden="true">T</span><span>TraceTidy<span class="version">1.0</span></span></a>
+      <nav aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="https://github.com/GrimmReaper0/tracetidy-har-sanitizer" target="_blank" rel="noopener noreferrer">Source code <span aria-hidden="true">&#8599;</span></a></nav>
+      <span class="local-pill"><span class="dot" aria-hidden="true"></span>LOCAL-ONLY PROCESSING</span>
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="title">
+        <div class="hero-copy">
+          <p class="eyebrow">HAR SANITIZER / NETWORK INSPECTOR</p>
+          <h1 id="title">Share the trace.<br><span>Not the secrets.</span></h1>
+          <p class="intro">Turn a sensitive network capture into a smaller, reviewable debugging artifact. Keep the waterfall. Leave the payloads behind.</p>
+          <div class="trust-row"><span><b aria-hidden="true">&#10003;</b> No uploads</span><span><b aria-hidden="true">&#10003;</b> No account</span><span><b aria-hidden="true">&#10003;</b> Works offline</span></div>
+        </div>
+        <div class="code-card" aria-label="Illustration of data minimization">
+          <div class="code-bar"><span><i></i><i></i><i></i></span><span>capture.har &rarr; cleaned.har</span></div>
+          <div class="code-line"><span class="line-num">01</span><span class="code-muted">Authorization</span><span class="removed-tag">removed</span></div>
+          <div class="code-line"><span class="line-num">02</span><span class="code-muted">Cookie + Set-Cookie</span><span class="removed-tag">removed</span></div>
+          <div class="code-line"><span class="line-num">03</span><span class="code-muted">Request + response bodies</span><span class="removed-tag">removed</span></div>
+          <div class="code-line"><span class="line-num">04</span><span>Timings + status codes</span><span class="kept-tag">kept</span></div>
+          <div class="code-bottom"><span class="tiny-lock" aria-hidden="true">&#9671;</span> Your file stays in this browser.</div>
+        </div>
+      </section>
+      <section id="workspace" class="workspace" aria-labelledby="workspace-title">
+        <div class="section-heading"><h2 id="workspace-title"><span class="section-number">01</span> Clean your capture</h2><span class="muted">HAR 1.2 &middot; up to 25 MiB</span></div>
+        <div class="upload-layout">
+          <section id="dropzone" class="dropzone" aria-label="HAR file upload">
+            <div class="upload-mark" aria-hidden="true">&#8593;</div>
+            <div><h3>Drop your .har file here</h3><p>Processed in memory. Never sent to a server.</p></div>
+            <div class="upload-actions"><button id="choose-file" class="button primary" type="button">Choose a HAR file</button><button id="load-demo" class="button secondary" type="button">Try the demo <span aria-hidden="true">&#8594;</span></button></div>
+            <input id="file-input" type="file" accept=".har,.json,application/json" hidden aria-label="Select a HAR file">
+            <p class="upload-caption">Nothing handy? The demo uses 12 entirely fictional requests.</p>
+          </section>
+          <fieldset class="profiles"><legend>Privacy profile</legend>
+            <label class="profile"><input type="radio" name="mode" value="private" checked><span><strong>Private <small>DEFAULT</small></strong><span>Alias hosts, paths, and query names.<br>Remove headers, cookies, and bodies.</span></span></label>
+            <label class="profile"><input type="radio" name="mode" value="diagnostic"><span><strong>Diagnostic <small class="caution">REVIEW URLS</small></strong><span>Keep readable hosts, paths, and query names. Still remove all payloads.</span></span></label>
+            <p class="profile-note">Both modes redact query values, remove unknown metadata, and shift timestamps.</p>
+          </fieldset>
+        </div>
+        <div class="status-line"><p id="status" role="status" aria-live="polite">Ready. Choose a file or explore the demo.</p><button id="reset" class="text-button" type="button" hidden>Clear capture</button></div>
+        <div id="error" class="error-banner" role="alert" hidden></div>
+      </section>
+      <section id="results" class="results" aria-labelledby="results-title" hidden>
+        <div class="section-heading result-heading"><h2 id="results-title"><span class="section-number">02</span> Review before you share</h2><span id="capture-badge" class="subtle-badge">PRIVATE PROFILE</span></div>
+        <div class="metrics">
+          <div class="metric"><p>Requests preserved</p><strong id="metric-requests">0</strong><span>Methods, timings, and status</span></div>
+          <div class="metric"><p>Headers + bodies removed</p><strong id="metric-removed">0</strong><span>Records, not unique secrets</span></div>
+          <div class="metric"><p>Failed requests</p><strong id="metric-failed">0</strong><span>HTTP 4xx/5xx or status 0</span></div>
+          <div class="metric"><p>Recorded request span</p><strong id="metric-duration">0 ms</strong><span id="metric-size">Output size</span></div>
+        </div>
+        <div id="review-warning" class="review-warning"></div>
+        <div class="inspector">
+          <div class="inspector-top"><div class="tabs" role="tablist" aria-label="Capture views"><button id="tab-waterfall" class="tab" type="button" role="tab" aria-selected="true" aria-controls="panel-waterfall">Waterfall</button><button id="tab-audit" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-audit" tabindex="-1">Redaction report</button><button id="tab-brief" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-brief" tabindex="-1">Debugging brief</button></div><button id="download-har" class="button primary small" type="button">Download cleaned HAR <span aria-hidden="true">&#8595;</span></button></div>
+          <div id="panel-waterfall" role="tabpanel" aria-labelledby="tab-waterfall">
+            <div class="filters"><label class="search"><span aria-hidden="true">&#8981;</span><input id="search" type="search" placeholder="Filter sanitized URLs or methods..." aria-label="Filter requests" autocomplete="off" spellcheck="false"></label><label class="select-label">Status <select id="status-filter"><option value="all">All requests</option><option value="failed">Failed (0, 4xx, 5xx)</option><option value="success">Success (2xx)</option><option value="redirect">Redirects (3xx)</option></select></label><label class="select-label">Sort <select id="sort"><option value="start">Start time</option><option value="slowest">Slowest first</option><option value="status">Status code</option></select></label></div>
+            <div class="table-scroll"><table class="request-table"><thead><tr><th scope="col">#</th><th scope="col">Method / sanitized request</th><th scope="col">Status</th><th scope="col">Duration</th><th scope="col" class="waterfall-heading">Waterfall <span id="waterfall-span"></span></th></tr></thead><tbody id="request-rows"></tbody></table></div>
+            <p id="empty-filter" class="empty-message" hidden>No requests match. Try a different filter.</p>
+            <div class="table-footer"><p id="request-count"></p><div class="pagination"><button id="prev-page" class="button secondary small" type="button" aria-label="Previous page">&larr;</button><span id="page-count">1 / 1</span><button id="next-page" class="button secondary small" type="button" aria-label="Next page">&rarr;</button></div><span class="legend"><i class="legend-good"></i>Response <i class="legend-bad"></i>Error / status 0</span></div>
+          </div>
+          <div id="panel-audit" class="audit-panel" role="tabpanel" aria-labelledby="tab-audit" hidden>
+            <div class="panel-intro"><div><h3>Know what changed.</h3><p>Counts only. No original values, filenames, or alias mappings are included.</p></div><button id="download-audit" type="button" class="button secondary small">Save audit JSON</button></div>
+            <div id="audit-grid" class="audit-grid"></div><h4>Processing notes</h4><ul id="audit-notes"></ul><p class="muted audit-disclaimer">Counts describe operations, not distinct secrets. Query values can appear in multiple HAR fields. Unknown metadata is counted at the discarded field boundary, not recursively.</p>
+          </div>
+          <div id="panel-brief" class="brief-panel" role="tabpanel" aria-labelledby="tab-brief" hidden>
+            <div class="panel-intro"><div><h3>A useful starting point for your issue.</h3><p>Observed facts, slow requests, and failures. No AI service or root-cause guesses.</p></div><div class="brief-actions"><button id="download-brief" class="button secondary small" type="button">Save .md</button><button id="copy-brief" class="button secondary small" type="button">Copy brief</button></div></div>
+            <label class="sr-only" for="brief-text">Sanitized debugging brief in Markdown</label><textarea id="brief-text" readonly spellcheck="false"></textarea>
+          </div>
+        </div>
+        <p class="fine-print">Minimized does not mean anonymous. Request patterns, timing, sizes, and status codes may still identify activity. This export is not a replay script.</p>
+      </section>
+      <section id="how-it-works" class="how-it-works" aria-labelledby="how-title">
+        <div class="section-heading"><h2 id="how-title">Less data. Better handoffs.</h2><span class="muted">For developers, support teams, and bug reports</span></div>
+        <div class="how-grid"><article><span class="how-number">01 / CAPTURE</span><h3>Export from DevTools</h3><p>Save your browser's network activity as a HAR file. Even a browser-sanitized capture deserves review.</p></article><article><span class="how-number">02 / MINIMIZE</span><h3>Keep only what's needed</h3><p>TraceTidy builds a new HAR from allowed fields. Unknown extensions, headers, and bodies are left out.</p></article><article><span class="how-number">03 / HAND OFF</span><h3>Review. Then share.</h3><p>Inspect the waterfall and download the cleaned HAR, counts-only audit, or a ready-to-edit debugging brief.</p></article></div>
+        <details><summary>What does TraceTidy remove, and what are its limits?</summary><p>Both profiles remove all headers, cookie objects, request and response bodies, original timestamps, page labels, URL credentials and fragments, cache details, and unknown fields. Query values are always replaced. Private mode also replaces hosts, path segments, and query names with consistent within-file aliases. Diagnostic mode keeps these strings, so secrets in readable URLs can remain.</p><p>Numerical metadata and request structure remain. Aliases are not cryptographic anonymization, and requests can be correlated within the same file. Malformed fields are normalized, with processing notes in the audit. This tool is not a compliance guarantee, a secret detector, or a full-fidelity HAR editor.</p></details>
+        <details><summary>Does it work without an internet connection?</summary><p>Yes. The distribution is one self-contained HTML file with no remote fonts, scripts, analytics, or APIs. Open the file directly in a modern browser. Input is processed by a local Web Worker, not uploaded. Clear the capture or close the tab to release the app's references; this is not a guarantee of secure memory erasure.</p></details>
+      </section>
+    </main>
+    <footer><span><strong>TraceTidy</strong> <span class="muted">/ Small tool. Smaller disclosure.</span></span><span class="muted">Open source &middot; MIT &middot; No runtime dependencies</span></footer>
+  </div>
+  <dialog id="request-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><h2 id="dialog-title">Request details</h2><button id="close-dialog" class="button secondary small" type="button" aria-label="Close request details">Close</button></div><p class="muted">Sanitized values only. All headers and bodies were removed.</p><pre id="request-details"></pre></dialog>
+  <noscript><p class="noscript">JavaScript is required for local processing. The command-line version also works entirely offline.</p></noscript>
+  <script>// INLINE_JS</script>
+</body>
+</html>
