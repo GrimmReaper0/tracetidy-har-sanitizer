@@ -1,0 +1,2 @@
+# Optional browser-test tooling only. Not required to use, build, or unit-test TraceTidy.
+playwright==1.57.0
