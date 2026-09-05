@@ -251,10 +251,19 @@ class AppTests(unittest.TestCase):
         expect(self.page.locator('#metric-requests')).to_have_text('0')
         expect(self.page.locator('#request-rows tr')).to_have_count(0)
 
-    def test_processing_works_offline_after_document_load(self):
-        self.context.set_offline(True)
+    def test_processing_needs_no_network_after_document_load(self):
+        attempted = []
+
+        def block_network(route):
+            if route.request.url.startswith(('http://', 'https://')):
+                attempted.append(route.request.url)
+                route.abort()
+            else:
+                route.continue_()
+
+        self.context.route('**/*', block_network)
         self.demo()
-        self.assertEqual([url for url in self.requests if url.startswith(('http://', 'https://'))], [])
+        self.assertEqual(attempted, [])
         self.page.locator('#tab-brief').click()
         self.assertIn('Network debugging brief', self.page.locator('#brief-text').input_value())
 
