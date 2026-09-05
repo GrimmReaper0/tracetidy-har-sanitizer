@@ -1,4 +1,5 @@
 name: CI
+# Generated distribution assets are synchronized by release-assets.yml and verified here.
 on:
   push:
     branches: [main]
