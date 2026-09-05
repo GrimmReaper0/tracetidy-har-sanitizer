@@ -1,0 +1,662 @@
+
+> tracetidy-har-sanitizer@1.0.0 test
+> node scripts/test.mjs
+
+TAP version 13
+# Subtest: single-file build has an exact matching CSP hash (replacement-token regression)
+ok 1 - single-file build has an exact matching CSP hash (replacement-token regression)
+  ---
+  duration_ms: 10.93519
+  type: 'test'
+  ...
+# Subtest: offline build has no remote scripts, styles, fonts or iframes
+ok 2 - offline build has no remote scripts, styles, fonts or iframes
+  ---
+  duration_ms: 2.963023
+  type: 'test'
+  ...
+# Subtest: source uses text-only DOM rendering, not HTML injection or browser storage
+ok 3 - source uses text-only DOM rendering, not HTML injection or browser storage
+  ---
+  duration_ms: 3.345008
+  type: 'test'
+  ...
+# Subtest: build is deterministic
+ok 4 - build is deterministic
+  ---
+  duration_ms: 83.837421
+  type: 'test'
+  ...
+# Subtest: package is dependency-free at runtime and lockfile matches the version
+ok 5 - package is dependency-free at runtime and lockfile matches the version
+  ---
+  duration_ms: 4.015219
+  type: 'test'
+  ...
+# Subtest: source and build do not claim a registry package or guaranteed anonymity
+ok 6 - source and build do not claim a registry package or guaranteed anonymity
+  ---
+  duration_ms: 4.662688
+  type: 'test'
+  ...
+# Subtest: CLI --help
+ok 7 - CLI --help
+  ---
+  duration_ms: 55.574009
+  type: 'test'
+  ...
+# Subtest: CLI --version
+ok 8 - CLI --version
+  ---
+  duration_ms: 49.867521
+  type: 'test'
+  ...
+# Subtest: stdin to stdout is pure JSON; summaries go to stderr
+ok 9 - stdin to stdout is pure JSON; summaries go to stderr
+  ---
+  duration_ms: 81.588211
+  type: 'test'
+  ...
+# Subtest: implicit stdin works
+ok 10 - implicit stdin works
+  ---
+  duration_ms: 56.777803
+  type: 'test'
+  ...
+# Subtest: quiet and compact output
+ok 11 - quiet and compact output
+  ---
+  duration_ms: 59.573037
+  type: 'test'
+  ...
+# Subtest: writes HAR, audit and brief together with restrictive file mode where supported
+ok 12 - writes HAR, audit and brief together with restrictive file mode where supported
+  ---
+  duration_ms: 133.128248
+  type: 'test'
+  ...
+# Subtest: reads input from a regular file
+ok 13 - reads input from a regular file
+  ---
+  duration_ms: 52.168761
+  type: 'test'
+  ...
+# Subtest: handles paths containing spaces
+ok 14 - handles paths containing spaces
+  ---
+  duration_ms: 66.586436
+  type: 'test'
+  ...
+# Subtest: refuses to overwrite input
+ok 15 - refuses to overwrite input
+  ---
+  duration_ms: 55.3347
+  type: 'test'
+  ...
+# Subtest: refuses existing destinations, without writing any other requested outputs
+ok 16 - refuses existing destinations, without writing any other requested outputs
+  ---
+  duration_ms: 72.940697
+  type: 'test'
+  ...
+# Subtest: refuses symlink output without changing the target
+ok 17 - refuses symlink output without changing the target
+  ---
+  duration_ms: 59.93892
+  type: 'test'
+  ...
+# Subtest: refuses duplicated normalized output paths
+ok 18 - refuses duplicated normalized output paths
+  ---
+  duration_ms: 66.835558
+  type: 'test'
+  ...
+# Subtest: cleans staging files when another output directory is missing
+ok 19 - cleans staging files when another output directory is missing
+  ---
+  duration_ms: 65.494381
+  type: 'test'
+  ...
+# Subtest: reports missing input without a raw filename
+ok 20 - reports missing input without a raw filename
+  ---
+  duration_ms: 64.624797
+  type: 'test'
+  ...
+# Subtest: rejects directory input
+ok 21 - rejects directory input
+  ---
+  duration_ms: 36.80954
+  type: 'test'
+  ...
+# Subtest: rejects invalid UTF-8
+ok 22 - rejects invalid UTF-8
+  ---
+  duration_ms: 37.697338
+  type: 'test'
+  ...
+# Subtest: rejects oversized stdin before creating output
+ok 23 - rejects oversized stdin before creating output
+  ---
+  duration_ms: 80.473369
+  type: 'test'
+  ...
+# Subtest: rejects oversized regular input before parsing
+ok 24 - rejects oversized regular input before parsing
+  ---
+  duration_ms: 72.002848
+  type: 'test'
+  ...
+# Subtest: rejects invalid JSON without exposing contents
+ok 25 - rejects invalid JSON without exposing contents
+  ---
+  duration_ms: 37.066574
+  type: 'test'
+  ...
+# Subtest: rejects invalid CLI arguments ["--wat"]
+ok 26 - rejects invalid CLI arguments ["--wat"]
+  ---
+  duration_ms: 35.638603
+  type: 'test'
+  ...
+# Subtest: rejects invalid CLI arguments ["-","--mode","unsafe"]
+ok 27 - rejects invalid CLI arguments ["-","--mode","unsafe"]
+  ---
+  duration_ms: 34.623772
+  type: 'test'
+  ...
+# Subtest: rejects invalid CLI arguments ["a.har","b.har"]
+ok 28 - rejects invalid CLI arguments ["a.har","b.har"]
+  ---
+  duration_ms: 31.820834
+  type: 'test'
+  ...
+# Subtest: rejects invalid CLI arguments ["-","-o",""]
+ok 29 - rejects invalid CLI arguments ["-","-o",""]
+  ---
+  duration_ms: 31.200149
+  type: 'test'
+  ...
+# Subtest: rejects invalid CLI arguments ["-","--report","-"]
+ok 30 - rejects invalid CLI arguments ["-","--report","-"]
+  ---
+  duration_ms: 33.931301
+  type: 'test'
+  ...
+# Subtest: rejects invalid CLI arguments ["-","--output"]
+ok 31 - rejects invalid CLI arguments ["-","--output"]
+  ---
+  duration_ms: 34.002792
+  type: 'test'
+  ...
+# Subtest: diagnostic CLI emits an explicit URL warning
+ok 32 - diagnostic CLI emits an explicit URL warning
+  ---
+  duration_ms: 40.610957
+  type: 'test'
+  ...
+# Subtest: report-only invocation still writes clean HAR to stdout
+ok 33 - report-only invocation still writes clean HAR to stdout
+  ---
+  duration_ms: 50.308647
+  type: 'test'
+  ...
+# Subtest: rejects null
+ok 34 - rejects null
+  ---
+  duration_ms: 3.424409
+  type: 'test'
+  ...
+# Subtest: rejects array
+ok 35 - rejects array
+  ---
+  duration_ms: 2.546271
+  type: 'test'
+  ...
+# Subtest: rejects number
+ok 36 - rejects number
+  ---
+  duration_ms: 0.149921
+  type: 'test'
+  ...
+# Subtest: rejects empty object
+ok 37 - rejects empty object
+  ---
+  duration_ms: 0.128966
+  type: 'test'
+  ...
+# Subtest: rejects missing entries
+ok 38 - rejects missing entries
+  ---
+  duration_ms: 0.115247
+  type: 'test'
+  ...
+# Subtest: rejects non-array entries
+ok 39 - rejects non-array entries
+  ---
+  duration_ms: 0.094729
+  type: 'test'
+  ...
+# Subtest: rejects invalid JSON without revealing snippets
+ok 40 - rejects invalid JSON without revealing snippets
+  ---
+  duration_ms: 0.323758
+  type: 'test'
+  ...
+# Subtest: accepts a UTF-8 BOM
+ok 41 - accepts a UTF-8 BOM
+  ---
+  duration_ms: 1.226162
+  type: 'test'
+  ...
+# Subtest: requires text for parsing
+ok 42 - requires text for parsing
+  ---
+  duration_ms: 2.560579
+  type: 'test'
+  ...
+# Subtest: enforces input byte limit, not character count
+ok 43 - enforces input byte limit, not character count
+  ---
+  duration_ms: 51.958632
+  type: 'test'
+  ...
+# Subtest: rejects too many entries before processing
+ok 44 - rejects too many entries before processing
+  ---
+  duration_ms: 0.420526
+  type: 'test'
+  ...
+# Subtest: rejects too many pages
+ok 45 - rejects too many pages
+  ---
+  duration_ms: 0.236903
+  type: 'test'
+  ...
+# Subtest: rejects malformed entries without including their values
+ok 46 - rejects malformed entries without including their values
+  ---
+  duration_ms: 1.719333
+  type: 'test'
+  ...
+# Subtest: rejects oversized optional arrays
+ok 47 - rejects oversized optional arrays
+  ---
+  duration_ms: 0.323943
+  type: 'test'
+  ...
+# Subtest: accepts empty captures with finite statistics
+ok 48 - accepts empty captures with finite statistics
+  ---
+  duration_ms: 0.632351
+  type: 'test'
+  ...
+# Subtest: rejects unsupported modes
+ok 49 - rejects unsupported modes
+  ---
+  duration_ms: 0.274904
+  type: 'test'
+  ...
+# Subtest: strips all headers, cookies, and bodies
+ok 50 - strips all headers, cookies, and bodies
+  ---
+  duration_ms: 2.585177
+  type: 'test'
+  ...
+# Subtest: does not modify input, including deeply frozen input
+ok 51 - does not modify input, including deeply frozen input
+  ---
+  duration_ms: 1.200357
+  type: 'test'
+  ...
+# Subtest: retains methods, status, timings, and recorded sizes on valid input
+ok 52 - retains methods, status, timings, and recorded sizes on valid input
+  ---
+  duration_ms: 0.948752
+  type: 'test'
+  ...
+# Subtest: aliases private URL host, path, and parameter names
+ok 53 - aliases private URL host, path, and parameter names
+  ---
+  duration_ms: 0.924498
+  type: 'test'
+  ...
+# Subtest: keeps readable host/path/names only in diagnostic mode
+ok 54 - keeps readable host/path/names only in diagnostic mode
+  ---
+  duration_ms: 0.535772
+  type: 'test'
+  ...
+# Subtest: strips user info, fragments, and query values in both modes
+ok 55 - strips user info, fragments, and query values in both modes
+  ---
+  duration_ms: 0.748825
+  type: 'test'
+  ...
+# Subtest: preserves duplicate queries and empty keys while redacting every copy
+ok 56 - preserves duplicate queries and empty keys while redacting every copy
+  ---
+  duration_ms: 0.391709
+  type: 'test'
+  ...
+# Subtest: aliases repeated hosts, paths, and query names consistently
+ok 57 - aliases repeated hosts, paths, and query names consistently
+  ---
+  duration_ms: 0.558445
+  type: 'test'
+  ...
+# Subtest: aliases do not carry over to another capture
+ok 58 - aliases do not carry over to another capture
+  ---
+  duration_ms: 0.38664
+  type: 'test'
+  ...
+# Subtest: private mode removes ports; diagnostic mode preserves ports
+ok 59 - private mode removes ports; diagnostic mode preserves ports
+  ---
+  duration_ms: 0.363434
+  type: 'test'
+  ...
+# Subtest: handles http URLs
+ok 60 - handles http URLs
+  ---
+  duration_ms: 0.287232
+  type: 'test'
+  ...
+# Subtest: handles https URLs
+ok 61 - handles https URLs
+  ---
+  duration_ms: 0.224335
+  type: 'test'
+  ...
+# Subtest: handles ws URLs
+ok 62 - handles ws URLs
+  ---
+  duration_ms: 0.254496
+  type: 'test'
+  ...
+# Subtest: handles wss URLs
+ok 63 - handles wss URLs
+  ---
+  duration_ms: 0.236484
+  type: 'test'
+  ...
+# Subtest: replaces unsupported URL data:text/pl
+ok 64 - replaces unsupported URL data:text/pl
+  ---
+  duration_ms: 1.308764
+  type: 'test'
+  ...
+# Subtest: replaces unsupported URL javascript:a
+ok 65 - replaces unsupported URL javascript:a
+  ---
+  duration_ms: 0.624525
+  type: 'test'
+  ...
+# Subtest: replaces unsupported URL file:///PRIV
+ok 66 - replaces unsupported URL file:///PRIV
+  ---
+  duration_ms: 0.423833
+  type: 'test'
+  ...
+# Subtest: replaces unsupported URL mailto:PRIVA
+ok 67 - replaces unsupported URL mailto:PRIVA
+  ---
+  duration_ms: 0.374981
+  type: 'test'
+  ...
+# Subtest: replaces unsupported URL PRIVATE_CANA
+ok 68 - replaces unsupported URL PRIVATE_CANA
+  ---
+  duration_ms: 0.462277
+  type: 'test'
+  ...
+# Subtest: replaces unsupported URL 
+ok 69 - replaces unsupported URL 
+  ---
+  duration_ms: 0.862355
+  type: 'test'
+  ...
+# Subtest: replaces unsupported URL null
+ok 70 - replaces unsupported URL null
+  ---
+  duration_ms: 0.242364
+  type: 'test'
+  ...
+# Subtest: replaces unsupported URL 42
+ok 71 - replaces unsupported URL 42
+  ---
+  duration_ms: 0.332528
+  type: 'test'
+  ...
+# Subtest: replaces URLs longer than the configured field limit
+ok 72 - replaces URLs longer than the configured field limit
+  ---
+  duration_ms: 0.442063
+  type: 'test'
+  ...
+# Subtest: handles IPv6, Unicode paths, percent encodings, and repeated slashes
+ok 73 - handles IPv6, Unicode paths, percent encodings, and repeated slashes
+  ---
+  duration_ms: 0.828081
+  type: 'test'
+  ...
+# Subtest: resolves and cleans relative redirects against the original request
+ok 74 - resolves and cleans relative redirects against the original request
+  ---
+  duration_ms: 0.460461
+  type: 'test'
+  ...
+# Subtest: cleans cross-origin redirects and credentials
+ok 75 - cleans cross-origin redirects and credentials
+  ---
+  duration_ms: 0.417731
+  type: 'test'
+  ...
+# Subtest: handles malformed redirect fields without propagating their objects
+ok 76 - handles malformed redirect fields without propagating their objects
+  ---
+  duration_ms: 0.425194
+  type: 'test'
+  ...
+# Subtest: relabels pages, shifts dates, and preserves relative offsets
+ok 77 - relabels pages, shifts dates, and preserves relative offsets
+  ---
+  duration_ms: 1.567314
+  type: 'test'
+  ...
+# Subtest: removes unmatched page references
+ok 78 - removes unmatched page references
+  ---
+  duration_ms: 0.477746
+  type: 'test'
+  ...
+# Subtest: rejects duplicate page IDs
+ok 79 - rejects duplicate page IDs
+  ---
+  duration_ms: 0.369848
+  type: 'test'
+  ...
+# Subtest: rejects malformed page objects
+ok 80 - rejects malformed page objects
+  ---
+  duration_ms: 0.301228
+  type: 'test'
+  ...
+# Subtest: normalizes malformed and huge-span dates without exposing strings
+ok 81 - normalizes malformed and huge-span dates without exposing strings
+  ---
+  duration_ms: 0.671918
+  type: 'test'
+  ...
+# Subtest: preserves one-millisecond intervals and timezone equivalence
+ok 82 - preserves one-millisecond intervals and timezone equivalence
+  ---
+  duration_ms: 0.609165
+  type: 'test'
+  ...
+# Subtest: normalizes invalid numeric and custom text fields
+ok 83 - normalizes invalid numeric and custom text fields
+  ---
+  duration_ms: 0.511632
+  type: 'test'
+  ...
+# Subtest: removes MIME parameters while preserving recognized base types
+ok 84 - removes MIME parameters while preserving recognized base types
+  ---
+  duration_ms: 0.564361
+  type: 'test'
+  ...
+# Subtest: normalizes missing fields on minimal request/response objects
+ok 85 - normalizes missing fields on minimal request/response objects
+  ---
+  duration_ms: 0.329539
+  type: 'test'
+  ...
+# Subtest: discards malformed optional arrays instead of copying them
+ok 86 - discards malformed optional arrays instead of copying them
+  ---
+  duration_ms: 0.581068
+  type: 'test'
+  ...
+# Subtest: drops arbitrary metadata and does not leak field names in the audit
+ok 87 - drops arbitrary metadata and does not leak field names in the audit
+  ---
+  duration_ms: 1.169522
+  type: 'test'
+  ...
+# Subtest: drops binary/base64 bodies, multipart parameters, and filenames
+ok 88 - drops binary/base64 bodies, multipart parameters, and filenames
+  ---
+  duration_ms: 0.545298
+  type: 'test'
+  ...
+# Subtest: does not prototype-pollute from JSON keys
+ok 89 - does not prototype-pollute from JSON keys
+  ---
+  duration_ms: 0.407831
+  type: 'test'
+  ...
+# Subtest: computes failures, median, p95, and span from observed data
+ok 90 - computes failures, median, p95, and span from observed data
+  ---
+  duration_ms: 0.667622
+  type: 'test'
+  ...
+# Subtest: uses nearest-rank p95 and even-sample median
+ok 91 - uses nearest-rank p95 and even-sample median
+  ---
+  duration_ms: 1.30209
+  type: 'test'
+  ...
+# Subtest: sorts slow requests deterministically, with a bounded failure list
+ok 92 - sorts slow requests deterministically, with a bounded failure list
+  ---
+  duration_ms: 1.305219
+  type: 'test'
+  ...
+# Subtest: a second private pass preserves valid cleaned HAR structure
+ok 93 - a second private pass preserves valid cleaned HAR structure
+  ---
+  duration_ms: 3.57749
+  type: 'test'
+  ...
+# Subtest: Markdown contains observed evidence, caveats, and reproducibility prompts
+ok 94 - Markdown contains observed evidence, caveats, and reproducibility prompts
+  ---
+  duration_ms: 0.717248
+  type: 'test'
+  ...
+# Subtest: escapes Markdown control characters in diagnostic URLs
+ok 95 - escapes Markdown control characters in diagnostic URLs
+  ---
+  duration_ms: 0.358377
+  type: 'test'
+  ...
+# Subtest: private-mode canary / immutability invariants: 200 generated cases, seed 1
+ok 96 - private-mode canary / immutability invariants: 200 generated cases, seed 1
+  ---
+  duration_ms: 101.056862
+  type: 'test'
+  ...
+# Subtest: private-mode canary / immutability invariants: 200 generated cases, seed 7
+ok 97 - private-mode canary / immutability invariants: 200 generated cases, seed 7
+  ---
+  duration_ms: 66.801223
+  type: 'test'
+  ...
+# Subtest: private-mode canary / immutability invariants: 200 generated cases, seed 42
+ok 98 - private-mode canary / immutability invariants: 200 generated cases, seed 42
+  ---
+  duration_ms: 45.001319
+  type: 'test'
+  ...
+# Subtest: private-mode canary / immutability invariants: 200 generated cases, seed 2026
+ok 99 - private-mode canary / immutability invariants: 200 generated cases, seed 2026
+  ---
+  duration_ms: 38.352261
+  type: 'test'
+  ...
+# Subtest: private-mode canary / immutability invariants: 200 generated cases, seed 3735928559
+ok 100 - private-mode canary / immutability invariants: 200 generated cases, seed 3735928559
+  ---
+  duration_ms: 39.848831
+  type: 'test'
+  ...
+# Subtest: publishing dry-run works without credentials or writes
+ok 101 - publishing dry-run works without credentials or writes
+  ---
+  duration_ms: 55.611602
+  type: 'test'
+  ...
+# Subtest: publishing dry-run describes optional Pages setup honestly
+ok 102 - publishing dry-run describes optional Pages setup honestly
+  ---
+  duration_ms: 73.248454
+  type: 'test'
+  ...
+# Subtest: publishing refuses unsafe owner and repo arguments
+ok 103 - publishing refuses unsafe owner and repo arguments
+  ---
+  duration_ms: 167.553932
+  type: 'test'
+  ...
+# Subtest: publishing helper provides local authentication instructions
+ok 104 - publishing helper provides local authentication instructions
+  ---
+  duration_ms: 48.028764
+  type: 'test'
+  ...
+# Subtest: local server returns the offline app and no-cache headers
+ok 105 - local server returns the offline app and no-cache headers
+  ---
+  duration_ms: 146.11239
+  type: 'test'
+  ...
+# Subtest: local server supports HEAD and refuses non-GET/HEAD methods
+ok 106 - local server supports HEAD and refuses non-GET/HEAD methods
+  ---
+  duration_ms: 87.82334
+  type: 'test'
+  ...
+# Subtest: local server never exposes arbitrary repository files
+ok 107 - local server never exposes arbitrary repository files
+  ---
+  duration_ms: 97.501524
+  type: 'test'
+  ...
+# Subtest: invalid local-server port fails before listening
+ok 108 - invalid local-server port fails before listening
+  ---
+  duration_ms: 75.433728
+  type: 'test'
+  ...
+1..108
+# tests 108
+# suites 0
+# pass 108
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1585.686914

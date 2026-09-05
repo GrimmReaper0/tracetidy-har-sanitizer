@@ -1,0 +1,31 @@
+test_audit_download (test_app.AppTests.test_audit_download) ... ok
+test_brief_download (test_app.AppTests.test_brief_download) ... ok
+test_clean_har_download (test_app.AppTests.test_clean_har_download) ... ok
+test_clear_capture (test_app.AppTests.test_clear_capture) ... ok
+test_clipboard_failure_selects_brief_for_manual_copy (test_app.AppTests.test_clipboard_failure_selects_brief_for_manual_copy) ... ok
+test_demo_and_statistics (test_app.AppTests.test_demo_and_statistics) ... ok
+test_diagnostic_url_is_text_not_executable_markup (test_app.AppTests.test_diagnostic_url_is_text_not_executable_markup) ... ok
+test_empty_capture (test_app.AppTests.test_empty_capture) ... ok
+test_filter_failed_requests (test_app.AppTests.test_filter_failed_requests) ... ok
+test_invalid_har_is_rejected (test_app.AppTests.test_invalid_har_is_rejected) ... ok
+test_invalid_json_removes_previous_downloadable_state (test_app.AppTests.test_invalid_json_removes_previous_downloadable_state) ... ok
+test_invalid_utf8_is_rejected (test_app.AppTests.test_invalid_utf8_is_rejected) ... ok
+test_keyboard_tabs (test_app.AppTests.test_keyboard_tabs) ... ok
+test_multiple_dropped_files_are_rejected (test_app.AppTests.test_multiple_dropped_files_are_rejected) ... ok
+test_no_external_requests_while_processing_or_reviewing (test_app.AppTests.test_no_external_requests_while_processing_or_reviewing) ... ok
+test_oversized_file_is_rejected (test_app.AppTests.test_oversized_file_is_rejected) ... ok
+test_pagination_bounds_and_filter_reset (test_app.AppTests.test_pagination_bounds_and_filter_reset) ... ok
+test_private_upload_never_renders_source_values_or_filename (test_app.AppTests.test_private_upload_never_renders_source_values_or_filename) ... ok
+test_processing_works_offline_after_document_load (test_app.AppTests.test_processing_works_offline_after_document_load) ... ok
+test_replacement_capture_wins (test_app.AppTests.test_replacement_capture_wins) ... ok
+test_responsive_layout_does_not_overflow_document (test_app.AppTests.test_responsive_layout_does_not_overflow_document) ... ok
+test_sort_slowest_first (test_app.AppTests.test_sort_slowest_first) ... ok
+test_switching_modes_reprocesses_original (test_app.AppTests.test_switching_modes_reprocesses_original) ... ok
+test_text_filter_and_empty_state (test_app.AppTests.test_text_filter_and_empty_state) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 12.750s
+
+OK
+
+Browser: chromium 143.0.7499.4; transport: http
