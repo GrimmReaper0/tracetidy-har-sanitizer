@@ -16,7 +16,7 @@ test_no_external_requests_while_processing_or_reviewing (test_app.AppTests.test_
 test_oversized_file_is_rejected (test_app.AppTests.test_oversized_file_is_rejected) ... ok
 test_pagination_bounds_and_filter_reset (test_app.AppTests.test_pagination_bounds_and_filter_reset) ... ok
 test_private_upload_never_renders_source_values_or_filename (test_app.AppTests.test_private_upload_never_renders_source_values_or_filename) ... ok
-test_processing_works_offline_after_document_load (test_app.AppTests.test_processing_works_offline_after_document_load) ... ok
+test_processing_needs_no_network_after_document_load (test_app.AppTests.test_processing_needs_no_network_after_document_load) ... ok
 test_replacement_capture_wins (test_app.AppTests.test_replacement_capture_wins) ... ok
 test_responsive_layout_does_not_overflow_document (test_app.AppTests.test_responsive_layout_does_not_overflow_document) ... ok
 test_sort_slowest_first (test_app.AppTests.test_sort_slowest_first) ... ok
@@ -24,7 +24,7 @@ test_switching_modes_reprocesses_original (test_app.AppTests.test_switching_mode
 test_text_filter_and_empty_state (test_app.AppTests.test_text_filter_and_empty_state) ... ok
 
 ----------------------------------------------------------------------
-Ran 24 tests in 10.304s
+Ran 24 tests in 11.924s
 
 OK
 
