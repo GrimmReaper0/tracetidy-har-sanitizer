@@ -24,7 +24,7 @@ test_switching_modes_reprocesses_original (test_app.AppTests.test_switching_mode
 test_text_filter_and_empty_state (test_app.AppTests.test_text_filter_and_empty_state) ... ok
 
 ----------------------------------------------------------------------
-Ran 24 tests in 12.750s
+Ran 24 tests in 10.304s
 
 OK
 

@@ -7,12 +7,12 @@
   "inputBytes": 12565481,
   "outputBytes": 5455402,
   "samplesMs": [
-    186.51,
-    192.48,
-    140.06,
-    131.83,
-    132.27
+    169.79,
+    181.2,
+    133.72,
+    132.74,
+    127.16
   ],
-  "medianMs": 140.06,
+  "medianMs": 133.72,
   "warning": "A local measurement, not a performance guarantee. Different hardware, captures, and browsers vary."
 }
