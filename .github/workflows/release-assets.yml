@@ -1,0 +1,106 @@
+name: Build release assets
+
+# This job runs when this workflow file itself changes. It exists to create the
+# checked-in deterministic distribution, synthetic fixture, verification logs,
+# and fictional-demo screenshots from the published source.
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/release-assets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-assets
+  cancel-in-progress: false
+
+jobs:
+  build-assets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Build deterministic distribution
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run build
+      - name: Verify Node suite and coverage
+        run: |
+          npm test 2>&1 | tee docs/verification-node.txt
+          npm run test:coverage 2>&1 | tee docs/verification-coverage.txt
+      - name: Install Chromium test dependency
+        run: |
+          python -m pip install -r requirements-dev.txt
+          python -m playwright install --with-deps chromium
+      - name: Verify browser suite
+        env:
+          TRACETIDY_BROWSER: chromium
+          TRACETIDY_TEST_TRANSPORT: http
+        run: python -m unittest discover -s tests/browser -p 'test_*.py' -v 2>&1 | tee docs/verification-browser.txt
+      - name: Capture fictional demo screenshots
+        run: |
+          python - <<'PY'
+          import functools
+          import threading
+          from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+
+          root = Path.cwd()
+          class Quiet(SimpleHTTPRequestHandler):
+              def log_message(self, *args):
+                  pass
+          handler = functools.partial(Quiet, directory=str(root / 'dist'))
+          server = ThreadingHTTPServer(('127.0.0.1', 0), handler)
+          thread = threading.Thread(target=server.serve_forever, daemon=True)
+          thread.start()
+          url = f'http://127.0.0.1:{server.server_port}/'
+          try:
+              with sync_playwright() as p:
+                  browser = p.chromium.launch(headless=True)
+                  page = browser.new_page(viewport={'width': 1440, 'height': 1050}, device_scale_factor=1)
+                  page.goto(url, wait_until='load')
+                  page.locator('#load-demo').click()
+                  page.locator('#results').wait_for(state='visible')
+                  page.screenshot(path='docs/screenshot.png', full_page=True)
+                  page.close()
+                  mobile = browser.new_page(viewport={'width': 390, 'height': 844}, device_scale_factor=1)
+                  mobile.goto(url, wait_until='load')
+                  mobile.locator('#load-demo').click()
+                  mobile.locator('#results').wait_for(state='visible')
+                  mobile.screenshot(path='docs/screenshot-mobile.png', full_page=True)
+                  browser.close()
+          finally:
+              server.shutdown()
+              server.server_close()
+              thread.join(timeout=5)
+          PY
+      - name: Record benchmark and manifest
+        run: |
+          npm run benchmark -- 10000 | tail -n +5 > docs/benchmark.json
+          node scripts/manifest.mjs
+          chmod +x bin/tracetidy.js
+          rm -f .bootstrap
+      - name: Commit generated release assets
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -- dist/index.html examples/demo.har docs/screenshot.png docs/screenshot-mobile.png docs/verification-node.txt docs/verification-coverage.txt docs/verification-browser.txt docs/benchmark.json release-manifest.json bin/tracetidy.js .bootstrap
+          if git diff --cached --quiet; then
+            echo 'Generated assets already match the repository.'
+          else
+            git commit -m 'build: generate verified release assets'
+            git push origin HEAD:main
+          fi
