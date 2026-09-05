@@ -1,6 +1,6 @@
 /* The build injects WORKER_SOURCE and DEMO_TEXT. No networking or persistence. */
 const $ = (id) => document.getElementById(id);
-const state = { result: null, source: null, worker: null, generation: 0, page: 0, filtered: [], activeTab: 'waterfall' };
+const state = { result: null, source: null, worker: null, workerUrl: null, generation: 0, page: 0, filtered: [], activeTab: 'waterfall' };
 const PAGE_SIZE = 50;
 const MAX_BYTES = 25 * 1024 * 1024;
 const tabs = ['waterfall', 'audit', 'brief'];
@@ -14,6 +14,8 @@ function terminate() {
   state.generation++;
   if (state.worker) state.worker.terminate();
   state.worker = null;
+  if (state.workerUrl) URL.revokeObjectURL(state.workerUrl);
+  state.workerUrl = null;
 }
 function clearOutput() {
   state.result = null;
@@ -48,10 +50,9 @@ function processSource(source) {
   $('workspace').setAttribute('aria-busy', 'true');
   setStatus('Processing locally. Your capture is not being uploaded.');
   const generation = state.generation;
-  let workerUrl;
   try {
-    workerUrl = URL.createObjectURL(new Blob([WORKER_SOURCE], { type: 'text/javascript' }));
-    const worker = new Worker(workerUrl);
+    state.workerUrl = URL.createObjectURL(new Blob([WORKER_SOURCE], { type: 'text/javascript' }));
+    const worker = new Worker(state.workerUrl);
     state.worker = worker;
     worker.onmessage = ({ data }) => {
       if (generation !== state.generation) return;
@@ -68,8 +69,6 @@ function processSource(source) {
     worker.postMessage({ ...source, mode: mode() });
   } catch {
     fail('This browser could not start the local worker. Try a current browser or the command-line version.');
-  } finally {
-    if (workerUrl) URL.revokeObjectURL(workerUrl);
   }
 }
 function acceptFiles(files) {
