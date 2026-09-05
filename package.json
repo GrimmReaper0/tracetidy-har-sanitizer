@@ -1,0 +1,59 @@
+{
+  "name": "tracetidy-har-sanitizer",
+  "version": "1.0.0",
+  "description": "Offline HAR sanitizer, network waterfall viewer, and shareable debugging briefs. Zero runtime dependencies.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "tracetidy": "bin/tracetidy.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/core.js"
+    }
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/test.mjs",
+    "test:coverage": "node scripts/test.mjs --coverage",
+    "test:browser": "python -m unittest discover -s tests/browser -p test_*.py -v",
+    "check": "node scripts/check.mjs",
+    "verify": "npm run build && npm run check && npm test",
+    "start": "node scripts/serve.mjs",
+    "benchmark": "node scripts/benchmark.mjs",
+    "publish:github": "node scripts/publish.mjs",
+    "test:types": "tsc --noEmit --strict --module NodeNext --target ES2022 tests/types.test.ts"
+  },
+  "keywords": [
+    "har",
+    "har-sanitizer",
+    "har-viewer",
+    "privacy",
+    "redaction",
+    "offline",
+    "devtools",
+    "network-debugging",
+    "waterfall",
+    "bug-report"
+  ],
+  "author": "GrimmReaper0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GrimmReaper0/tracetidy-har-sanitizer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GrimmReaper0/tracetidy-har-sanitizer/issues"
+  }
+}
