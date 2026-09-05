@@ -100,12 +100,11 @@ jobs:
           npm run benchmark -- 10000 | tail -n +5 > docs/benchmark.json
           node scripts/manifest.mjs
           chmod +x bin/tracetidy.js
-          rm -f .bootstrap
       - name: Commit generated release assets
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add -- dist/index.html examples/demo.har docs/screenshot.png docs/screenshot-mobile.png docs/verification-node.txt docs/verification-coverage.txt docs/verification-browser.txt docs/benchmark.json release-manifest.json bin/tracetidy.js .bootstrap
+          git add -- dist/index.html examples/demo.har docs/screenshot.png docs/screenshot-mobile.png docs/verification-node.txt docs/verification-coverage.txt docs/verification-browser.txt docs/benchmark.json release-manifest.json bin/tracetidy.js
           if git diff --cached --quiet; then
             echo 'Generated assets already match the repository.'
           else
