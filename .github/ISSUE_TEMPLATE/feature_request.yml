@@ -1,0 +1,19 @@
+name: Feature request
+description: Describe a debugging problem TraceTidy could solve.
+title: '[Feature] '
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the workflow, not only the proposed feature.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior and privacy tradeoff
+      description: What would be preserved, removed, or newly exposed?
+    validations:
+      required: true
